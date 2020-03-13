@@ -184,6 +184,16 @@ trait Auditable
         ];
     }
 
+/**
+     * Get the old/new attributes of a forceDeleted event.
+     *
+     * @return array
+     */
+    protected function getforceDeletedEventAttributes(): array
+    {
+        return $this->getDeletedEventAttributes();
+    }
+
     /**
      * Get the old/new attributes of a restored event.
      *

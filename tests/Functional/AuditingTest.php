@@ -224,6 +224,37 @@ class AuditingTest extends AuditingTestCase
     /**
      * @test
      */
+    public function itWillAuditTheForceDeletedEvent()
+    {
+        $this->app['config']->set('audit.events', [
+            'forceDeleted',
+        ]);
+
+        $article = factory(Article::class)->create([
+            'title'        => 'How To Audit Eloquent Models',
+            'content'      => 'N/A',
+            'published_at' => null,
+            'reviewed'     => 0,
+        ]);
+
+        $article->forceDelete();
+
+        $audit = Audit::first();
+
+        $this->assertArraySubset([
+            'title'        => 'How To Audit Eloquent Models',
+            'content'      => 'N/A',
+            'published_at' => null,
+            'reviewed'     => 0,
+            'id'           => 1,
+        ], $audit->old_values, true);
+
+        $this->assertEmpty($audit->new_values);
+    }
+
+    /**
+     * @test
+     */
     public function itWillAuditTheRestoredEvent()
     {
         $this->app['config']->set('audit.events', [

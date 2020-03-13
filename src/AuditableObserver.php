@@ -66,6 +66,18 @@ class AuditableObserver
     }
 
     /**
+     * Handle the forceDeleted event.
+     *
+     * @param \OwenIt\Auditing\Contracts\Auditable $model
+     *
+     * @return void
+     */
+    public function forceDeleted(Auditable $model)
+    {
+        Auditor::execute($model->setAuditEvent('forceDeleted'));
+    }
+
+    /**
      * Handle the restoring event.
      *
      * @param \OwenIt\Auditing\Contracts\Auditable $model
