@@ -119,6 +119,7 @@ class AuditableTest extends AuditingTestCase
             'created',
             'updated',
             'deleted',
+            'forceDeleted',
             'restored',
         ], $model->getAuditEvents(), true);
     }
@@ -215,6 +216,9 @@ class AuditableTest extends AuditingTestCase
         $this->assertTrue($model->readyForAuditing());
 
         $model->setAuditEvent('deleted');
+        $this->assertTrue($model->readyForAuditing());
+
+        $model->setAuditEvent('forceDeleted');
         $this->assertTrue($model->readyForAuditing());
 
         $model->setAuditEvent('restored');

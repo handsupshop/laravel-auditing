@@ -60,6 +60,7 @@ return [
         'created',
         'updated',
         'deleted',
+        'forceDeleted',
         'restored',
     ],
 

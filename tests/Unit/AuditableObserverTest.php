@@ -61,6 +61,11 @@ class AuditableObserverTest extends AuditingTestCase
                 false,
             ],
             [
+                'forceDeleted',
+                false,
+                false,
+            ],
+            [
                 'restoring',
                 false,
                 true,
